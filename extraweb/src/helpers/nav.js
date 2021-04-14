@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 
 import Juegos from '../components/Juegos'
 import Inicio from '../components/Inicio'
+import SignIn from '../components/Login'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -36,7 +37,7 @@ const NavBar=()=> {
           case 3:
               return <a>holaa</a>;
           default:
-              return <a>NO</a>;
+              return <SignIn/>;
       }
   }
 
