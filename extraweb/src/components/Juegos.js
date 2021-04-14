@@ -1,9 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-// import SearchBar from '@material-ui-search-bar';
+import ExposurePlus1Icon from '@material-ui/icons/ExposurePlus1';
+import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
 const useStyles = makeStyles((theme) => ({
@@ -42,8 +44,11 @@ const Juegos =()=>{
 console.log(data)
     return (
         <div>
+      <Container maxWidth="sm">
+      <input type="text" placeholder="Buscar" onChange={e=>{setSearch(e.target.value)}}/>
+      </Container>
             <div>
-                <input type="text" placeholder="Buscar" onChange={e=>{setSearch(e.target.value)}}/>
+                
             </div>
             {data.filter((val=>{
                 if (search==""){
@@ -68,16 +73,21 @@ console.log(data)
                                   {val.first_name}
                               </Typography>
                               <Typography variant="body2" gutterBottom>
-                                Full resolution 1920x1080 • JPEG
+                                Descripción
                               </Typography>
                               <Typography variant="body2" color="textSecondary">
-                                ID: 1030114
+                                Agregado por: 
                               </Typography>
                             </Grid>
                             <Grid item>
-                              <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                                Remove
-                              </Typography>
+                            <Button
+                            variant="contained"
+                            color="primary"
+                            className={classes.button}
+                            endIcon={<ExposurePlus1Icon/>}
+                            >
+                            Favoritos
+                          </Button>
                             </Grid>
                           </Grid>
                           <Grid item>
