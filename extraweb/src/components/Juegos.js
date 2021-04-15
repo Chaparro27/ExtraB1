@@ -1,11 +1,11 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import ExposurePlus1Icon from '@material-ui/icons/ExposurePlus1';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+import { GetJuegos } from '../actions/useractions';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
@@ -78,13 +78,17 @@ const useStyles = makeStyles((theme) => ({
 const Juegos = () => {
   const classes = useStyles();
   const [search, setSearch] = React.useState('')
-  const [data, setData] = React.useState([{ "id": 1, "first_name": "Mallissa" },
-  { "id": 2, "first_name": "Therine" },
-  { "id": 3, "first_name": "Steffie" },
-  { "id": 4, "first_name": "Shirline" },
-  { "id": 5, "first_name": "Albert" }])
+  const [data, setData] = React.useState([])
 
-  console.log(data)
+  useEffect(() => {
+    const fetchData = async () => {
+      const resp = await GetJuegos('buscarJuego');
+      console.log('respuesta', resp)
+      setData(resp);      
+    }
+    fetchData();
+  }, []); 
+
   return (
     <div>
       <div className={classes.search}>
@@ -102,16 +106,13 @@ const Juegos = () => {
           inputProps={{ 'aria-label': 'search' }}
         />
       </div>
-      {/* <Container maxWidth="sm">
-      <input  className="form-control" type="text" placeholder="Buscar" onChange={e=>{setSearch(e.target.value)}}/>
-      </Container> */}
       <div>
 
       </div>
       {data.filter((val => {
         if (search == "") {
           return val
-        } else if (val.first_name.toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
+        } else if (val.titulo.toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
           return val
         }
       })).map((val, key) => {
@@ -128,10 +129,10 @@ const Juegos = () => {
                   <Grid item xs container direction="column" spacing={2}>
                     <Grid item xs>
                       <Typography gutterBottom variant="subtitle1">
-                        {val.first_name}
+                        {val.titulo}
                       </Typography>
                       <Typography variant="body2" gutterBottom>
-                        Descripción
+                        {val.descripcion}
                               </Typography>
                       <Typography variant="body2" color="textSecondary">
                         Agregado por:

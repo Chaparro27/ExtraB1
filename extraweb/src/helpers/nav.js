@@ -10,7 +10,7 @@ import Juegos from '../components/Juegos'
 import Inicio from '../components/Inicio'
 import SignIn from '../components/Login'
 import Admin from '../components/Admin'
-
+import Tops from '../components/Tops'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,11 +32,11 @@ const NavBar=()=> {
   const ViewPanel = () => {
       switch (tap) {
           case 1:
-              return <Inicio/>;
+              return <Admin/>;
           case 2:
               return <Juegos/>;
           case 3:
-              return <Admin/>;
+              return <Tops/>;
           default:
               return <SignIn/>;
       }
@@ -57,7 +57,7 @@ const NavBar=()=> {
             TOP'S
           </IconButton>
           </Typography>
-          <Button  color="inherit">Salir</Button>
+          <Button onClick={ () => setTap(3) } color="inherit">Salir</Button>
         </Toolbar>
       </AppBar>
       <div>
