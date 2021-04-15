@@ -93,9 +93,7 @@ export default function SignIn() {
           </Button>
         </form>
       </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
+      
     </Container>
   );
 }
