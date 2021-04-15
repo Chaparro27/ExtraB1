@@ -9,7 +9,7 @@ import Container from '@material-ui/core/Container';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
-import { GetJuegos } from '../actions/useractions';
+import { GetJuegos,UpdateGame } from '../actions/useractions';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -89,8 +89,9 @@ const Admin = () => {
     fetchData();
   }, []); 
   console.log(data)
-  const Actualizar=(id)=>{
-    console.log(id)
+  const Actualizar =async(id)=>{
+    const resp = await UpdateGame({iduser:id},'updateGame');
+    console.log('respuesta', resp)
   }
 
   return (
@@ -108,7 +109,7 @@ const Admin = () => {
               <Grid container spacing={2}>
                 <Grid item>
                   <ButtonBase className={classes.image}>
-                    <img className={classes.img} alt="complex" src="/static/images/grid/complex.jpg" />
+                    <img className={classes.img} alt="complex" src={`${val.img}`}/>
                   </ButtonBase>
                 </Grid>
                 <Grid item xs={12} sm container>
@@ -119,9 +120,6 @@ const Admin = () => {
                       </Typography>
                       <Typography variant="body2" gutterBottom>
                         {val.descripcion}
-                              </Typography>
-                      <Typography variant="body2" color="textSecondary">
-                        Agregado por:
                               </Typography>
                     </Grid>
                     <Grid item>
@@ -135,9 +133,6 @@ const Admin = () => {
                         Aceptar Solicitud
                           </Button>
                     </Grid>
-                  </Grid>
-                  <Grid item>
-                    <Typography variant="subtitle1">$19.00</Typography>
                   </Grid>
                 </Grid>
               </Grid>

@@ -5,7 +5,7 @@ import ExposurePlus1Icon from '@material-ui/icons/ExposurePlus1';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import { GetJuegos } from '../actions/useractions';
+import { GetJuegos,UpdateGame } from '../actions/useractions';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
@@ -89,6 +89,11 @@ const Juegos = () => {
     fetchData();
   }, []); 
 
+  const Actualizar =async(id, cal)=>{
+    const resp = await UpdateGame({iduser:id, cali:cal},'updateGame');
+    console.log('respuesta', resp)
+  }
+
   return (
     <div>
       <div className={classes.search}>
@@ -122,7 +127,7 @@ const Juegos = () => {
               <Grid container spacing={2}>
                 <Grid item>
                   <ButtonBase className={classes.image}>
-                    <img className={classes.img} alt="complex" src="/static/images/grid/complex.jpg" />
+                    <img className={classes.img} alt="complex" src={`${val.img}`} />
                   </ButtonBase>
                 </Grid>
                 <Grid item xs={12} sm container>
@@ -134,23 +139,18 @@ const Juegos = () => {
                       <Typography variant="body2" gutterBottom>
                         {val.descripcion}
                               </Typography>
-                      <Typography variant="body2" color="textSecondary">
-                        Agregado por:
-                              </Typography>
                     </Grid>
                     <Grid item>
                       <Button
                         variant="contained"
                         color="primary"
+                        onClick={e=>Actualizar(val.id, val.calificacion)}
                         className={classes.button}
                         endIcon={<ExposurePlus1Icon />}
                       >
                         Favoritos
                           </Button>
                     </Grid>
-                  </Grid>
-                  <Grid item>
-                    <Typography variant="subtitle1">$19.00</Typography>
                   </Grid>
                 </Grid>
               </Grid>

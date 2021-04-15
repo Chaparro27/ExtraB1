@@ -5,11 +5,12 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
+import Avatar from '@material-ui/core/Avatar';
 
 import Juegos from '../components/Juegos'
 import Inicio from '../components/Inicio'
 import SignIn from '../components/Login'
-import Admin from '../components/Admin'
+// import Admin from '../components/Admin'
 import Tops from '../components/Tops'
 
 const useStyles = makeStyles((theme) => ({
@@ -22,6 +23,10 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+  }
 }));
 
 
@@ -32,13 +37,13 @@ const NavBar=()=> {
   const ViewPanel = () => {
       switch (tap) {
           case 1:
-              return <Admin/>;
+              return <Inicio/>;
           case 2:
               return <Juegos/>;
           case 3:
               return <Tops/>;
           default:
-              return <SignIn/>;
+              return <Inicio/>;
       }
   }
 
@@ -46,6 +51,10 @@ const NavBar=()=> {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
+          <Avatar alt="Remy Sharp" src="https://image.freepik.com/vector-gratis/plantilla-logo-videojuego-mando-juego_23-2147824453.jpg" className={classes.large} />
+          <Typography variant="h6">
+            GameCenter
+          </Typography>
           <Typography  variant="h3" className={classes.title}>
           <IconButton onClick={ () => setTap(1) }  color="inherit" >
             INICIO

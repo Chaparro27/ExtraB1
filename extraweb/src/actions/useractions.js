@@ -5,8 +5,7 @@ const BaseUrl = "http://localhost:3000/";
 
 
 export const startLoginEmailPassword = async( data, url, setCookies ) => {
-        await Axios.get(BaseUrl+url, data).then( resp => {
-        
+        await Axios.get(BaseUrl+url, data).then( resp => {       
         let response = resp.data;
         response.isLogged = true;
         response.tipousaurio !== 2 ? response.isadmin = false : response.isadmin = true;
@@ -25,13 +24,28 @@ export const GetJuegos = async (url) => {
     });
     return response;
 }
-
+//Actualizar 
 export const UpdateGame = async (data, url) => {
     let response;
     await Axios.put(BaseUrl+url, data).then( resp => {
-        Swal.fire('Actualización exitosa', resp, 'Ok');;
+        Swal.fire('Haz agregado a favoritos', resp, 'Ok');;
     }).catch( e => {
         console.log(e.response)
         Swal.fire('Error', e.message, 'error');
     });
 }
+//Nuevo Juego
+export const CreateGame = async (data, url) => {
+    let response;
+    await Axios.post(BaseUrl+url, data).then( resp => {
+        response = resp.data;
+        Swal.fire('Haz agregado un nuevo juego', resp, 'Ok');;
+    }).catch( e => {
+        console.log(e.response)
+        Swal.fire('Ocurrio un error', e.message, 'error');
+    });
+
+
+    return response;
+}
+

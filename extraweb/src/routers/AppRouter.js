@@ -25,15 +25,15 @@ const AppRouter = () => {
                     />
                 <PublicRoute 
                     path="/auth" 
-                    component={ Login } 
+                    component={ Nav } 
                     isAuthenticated={ cookies.c_user === undefined ? false : cookies.c_user.isLogged }
                     adminUser={ cookies.c_user === undefined ? false : cookies.c_user.isadmin }
                     /> 
                 <PrivateRoute 
                     path="/" 
                     component={ Nav }
-                    isAuthenticated={ cookies.c_user === undefined ? false : cookies.c_user.isLogged }
-                    adminUser={ cookies.c_user === undefined ? false : cookies.c_user.isadmin }
+                    isAuthenticated={ cookies.c_user === undefined ? true : cookies.c_user.isLogged }
+                    adminUser={ cookies.c_user === undefined ? true : cookies.c_user.isadmin }
                     />
                 
             </Switch>

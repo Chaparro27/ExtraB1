@@ -105,7 +105,7 @@ const Top = () => {
               <Grid container spacing={2}>
                 <Grid item>
                   <ButtonBase className={classes.image}>
-                    <img className={classes.img} alt="complex" src="/static/images/grid/complex.jpg" />
+                    <img className={classes.img} alt="complex" src={`${val.img}`} />
                   </ButtonBase>
                 </Grid>
                 <Grid item xs={12} sm container>
