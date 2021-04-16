@@ -12,6 +12,13 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { fade, FormControl,
+  OutlinedInput, IconButton, InputAdornment, InputLabel, Divider, FormHelperText
+} from '@material-ui/core';
+import { startGoogleLogin } from '../actions/auth';
+import { useCookies } from 'react-cookie';
+import { Formik } from 'formik';
+import { Login } from '../actions/useractions';
 
 function Copyright() {
   return (
@@ -47,8 +54,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
+  const [, setCookie] = useCookies(['c_user'])
   const classes = useStyles();
-
+  const handleGoogleLogin = () => {
+   startGoogleLogin(setCookie) ;
+}
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -59,27 +69,46 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Iniciar Sesión
         </Typography>
-        <form className={classes.form} noValidate>
+        <Formik
+                    initialValues={{ correo: '', pass: ''}}
+                    onSubmit={(data, { setSubmitting,resetForm }) => {
+                        setSubmitting(true);
+                        
+                        console.log("submit", data)
+                        Login(data, setCookie);
+                        //make async call
+                        setSubmitting(false);
+                        resetForm({})
+                    }}
+                >
+                    {({ values, isSubmitting, handleChange, handleBlur, handleSubmit, resetForm}) => (
+        <form onSubmit={handleSubmit} className={classes.form} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            id="email"
+            id="correo"
             label="Correo Electronico"
-            name="email"
+            name="correo"
             autoComplete="email"
             autoFocus
+            value={values.correo}
+            onChange={handleChange}
+            onBlur={handleBlur}
           />
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            name="password"
+            name="pass"
             label="Contraseña"
             type="password"
-            id="password"
+            id="pass"
+            value={values.pass}
+            onChange={handleChange}
+            onBlur={handleBlur}
             autoComplete="current-password"
           />
           <Button
@@ -88,10 +117,19 @@ export default function SignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            disabled={isSubmitting}
+            
           >
             Iniciar
           </Button>
+          <div>
+                        <IconButton onClick={ handleGoogleLogin } >
+                            <Avatar alt="" src='https://pbs.twimg.com/profile_images/988272404915875840/lE7ZkrO-_400x400.jpg' className={ classes.buttonGoogle }/>
+                        </IconButton>
+                    </div>
         </form>
+                                    )}
+                                    </Formik>
       </div>
       
     </Container>

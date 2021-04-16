@@ -90,7 +90,7 @@ const Juegos = () => {
   }, []); 
 
   const Actualizar =async(id, cal)=>{
-    const resp = await UpdateGame({iduser:id, cali:cal},'updateGame');
+    const resp = await UpdateGame({iduser:id, cali:cal++},'updateGame');
     console.log('respuesta', resp)
   }
 

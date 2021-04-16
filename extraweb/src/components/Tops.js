@@ -21,8 +21,8 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
     margin: 'auto',
-    maxWidth: 500,
-    marginTop: '26px',
+    maxWidth: 450,
+    marginTop: '15px',
     boxShadow: '2px 2px 10px #666'
   },
   image: {
@@ -117,9 +117,6 @@ const Top = () => {
                       <Typography variant="body2" gutterBottom>
                         {val.descripcion}
                               </Typography>
-                      <Typography variant="body2" color="textSecondary">
-                        Agregado por:
-                              </Typography>
                     </Grid>
                     <Grid item>
                       <Button
@@ -133,7 +130,7 @@ const Top = () => {
                     </Grid>
                   </Grid>
                   <Grid item>
-                    <Typography variant="subtitle1">$19.00</Typography>
+        <Typography variant="subtitle1">{val.calificacion} calificación</Typography>
                   </Grid>
                 </Grid>
               </Grid>

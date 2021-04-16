@@ -9,7 +9,7 @@ import Container from '@material-ui/core/Container';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
-import { GetJuegos,UpdateGame } from '../actions/useractions';
+import { GetJuegos,UpAdmin } from '../actions/useractions';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -90,7 +90,7 @@ const Admin = () => {
   }, []); 
   console.log(data)
   const Actualizar =async(id)=>{
-    const resp = await UpdateGame({iduser:id},'updateGame');
+    const resp = await UpAdmin({iduser:id},'adminStatus');
     console.log('respuesta', resp)
   }
 

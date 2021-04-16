@@ -7,6 +7,7 @@ import AdminPrivateRoute from './AdminPrivateRoute';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
 import Nav from '../helpers/nav';
+import NavAdmin from '../helpers/navAdmin';
 import Admin from '../components/Admin';
 import Login from '../components/Login';
 
@@ -19,19 +20,19 @@ const AppRouter = () => {
             <Switch>
                 <AdminPrivateRoute 
                     path="/dashboard" 
-                    component={ Admin }
+                    component={ NavAdmin }
                     isAuthenticated={ cookies.c_user === undefined ? false : cookies.c_user.isLogged }
                     adminUser={ cookies.c_user === undefined ? false : cookies.c_user.isadmin }
                     />
                 <PublicRoute 
                     path="/auth" 
-                    component={ Nav } 
+                    component={ Login } 
                     isAuthenticated={ cookies.c_user === undefined ? false : cookies.c_user.isLogged }
                     adminUser={ cookies.c_user === undefined ? false : cookies.c_user.isadmin }
                     /> 
                 <PrivateRoute 
                     path="/" 
-                    component={ Nav }
+                    component={Nav }
                     isAuthenticated={ cookies.c_user === undefined ? true : cookies.c_user.isLogged }
                     adminUser={ cookies.c_user === undefined ? true : cookies.c_user.isadmin }
                     />
